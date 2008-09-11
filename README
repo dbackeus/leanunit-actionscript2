@@ -10,13 +10,13 @@ After wasting too much time trying to figure out ASUnit and feeling sick about h
 
 === INSTALL
 
-git clone xxx
+git clone git://github.com/druiden/leanunit-actionscript2.git
 
 Then either copy the leanUnit directory into your source directory or link the cloned directory in your fla classpath (publish settings -> flash -> settings).
 
 === USAGE
 
-Goes a little something like this. You can also compile the example.fla to see it in action.
+Goes a little something like this. You can also compile 'example.fla' to see it in action.
 
 // StringTest.as
 class StringTest extends leanUnit.TestCase
