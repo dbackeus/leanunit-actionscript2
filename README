@@ -16,7 +16,9 @@ Then either copy the leanUnit directory into your source directory or link the c
 
 === USAGE
 
-Goes a little something like this. You can also compile 'example.fla' to see it in action.
+Goes a little something like this...
+
+.Begin with a simple test class.
 
 // StringTest.as
 class StringTest extends leanUnit.TestCase
@@ -44,8 +46,29 @@ class StringTest extends leanUnit.TestCase
 	}
 }
 
+.You are using the Flash IDE:
+
 // Framescript
 new StringTest().run()
+
+Export the fla and watch the results.
+
+.You are using the MTASC compiler:
+
+// MtascMain.as
+class MtascMain
+{
+	static function main(root)
+	{
+		var st = new StringTest()
+		st.run()
+	}
+}
+
+// From the command line
+mtasc -swf example.swf -header 550:400:10:080808 -main MtascMain.as
+
+Then run example.swf and watch the results.
 
 === LICENSE
 
