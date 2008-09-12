@@ -4,9 +4,7 @@ After wasting too much time trying to figure out ASUnit and feeling sick about h
 
 === REQUIREMENTS
 
-- Adobe Flash 7 or higher
-
-(I'm not familiar with other compilers - if you are and have something to add please do)
+A flash compiler. Example files are provided for Flash 8 and MTASC.
 
 === INSTALL
 

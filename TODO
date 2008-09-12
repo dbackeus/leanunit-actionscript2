@@ -1,0 +1,8 @@
+=== TODO
+
+The Dream:
+
+Run the test suite automatically every time a .as file is saved (like autotest in ruby).
+Getting as far as to auto-recompile is feasible (but how to run the flash file without duplicating windows and making it cross platform).
+Growl support on mac os (would seem out of the question since the flash player can't do those kinds of calls).
+Getting crazy and spawning a sinatra webserver that flash could communicate with could do it.
