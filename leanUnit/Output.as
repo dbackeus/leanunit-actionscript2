@@ -2,6 +2,8 @@
 
 The idea it that this should be a simple output class handling write and writeln functions. This implementation uses a html-enabled textfield on _root to display output with pretty colours. Please rewrite it if you desire some other kind of tracing behaviour.
 
+September 13 update: Added addSuccess and addFail functions since it should be the responsibility of the output class how to display these things.
+
 */
 
 class leanUnit.Output
@@ -21,6 +23,16 @@ class leanUnit.Output
 		write( "<p>"+(message || '')+"</p>", messageType )
 	}
 	
+	static function addSuccess()
+	{
+		write( '.' )
+	}
+	
+	static function addFail()
+	{
+		write( 'F', 'fail' )
+	}
+	
 	//-------------------------------------------------------------------
 	//	PRIVATE CLASS METHODS
 	//-------------------------------------------------------------------
@@ -36,7 +48,8 @@ class leanUnit.Output
 			tf.multiline = true
 			tf.wordWrap = true
 			tf.html = true
-			tf.setNewTextFormat(textFormat)
+			tf.antiAliasType = 'normal'
+			//tf.setNewTextFormat(textFormat)
 			tf.styleSheet = styleSheet
 		}
 		
@@ -56,7 +69,7 @@ class leanUnit.Output
 	static function get styleSheet()
 	{
 		var css = new TextField.StyleSheet()
-		css.parseCSS(".default { color:#FFFFFF; } .success { color:#00FF00; } .fail { color:#FF0000; }")
+		css.parseCSS("body { font-size: 10px; font-family: Monaco, Verdana; } .default { color:#FFFFFF; } .success { color:#00FF00; } .fail { color:#FF0000; }")
 		return css
 	}
 }

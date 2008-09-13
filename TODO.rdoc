@@ -1,6 +1,10 @@
 == TODO
 
+.TestSuite
 - Combining testcases into testsuites
+
+.Output
+- Add a scrollbar to deal with long test reports
 
 === The Dream *
 

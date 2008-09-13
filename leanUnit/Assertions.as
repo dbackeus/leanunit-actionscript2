@@ -2,10 +2,10 @@ import leanUnit.*
 
 class leanUnit.Assertions
 {
+	var currentClass:String
 	var currentMethod:String
 	
 	var assertionCount:Number
-	
 	var failures:Array
 	
 	//-------------------------------------------------------------------
@@ -18,11 +18,12 @@ class leanUnit.Assertions
 		assertionCount += 1
 		if( truth )
 		{
-			epicSuccess()
+			Output.addSuccess()
 		}
 		else
 		{
-			epicFail( message )
+			Output.addFail()
+			failures.push(new Failure(currentClass, currentMethod, message))
 		}
 	}
 
@@ -89,16 +90,5 @@ class leanUnit.Assertions
 			message = defaultMessage
 		}
 		return message
-	}
-	
-	private function epicSuccess()
-	{
-		Output.write( "." )
-	}
-	
-	private function epicFail(message)
-	{
-		Output.write( "F", 'fail' )
-		failures.push(new Failure(currentMethod, message))
 	}
 }

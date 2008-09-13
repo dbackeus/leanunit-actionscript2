@@ -52,7 +52,7 @@ class leanUnit.TestCase extends Assertions
 		reset()
 		
 		var startTime = getTimer()
-		Output.writeln("Started")
+		Output.writeln("Running "+currentClass)
 		
 		for(var i=0; i<testMethods.length; i++)
 		{
@@ -74,6 +74,8 @@ class leanUnit.TestCase extends Assertions
 	{
 		failures = new Array()
 		assertionCount = 0
+		currentClass = Reflection.getClassName(this)
+		currentClass = currentClass.substr(currentClass.lastIndexOf('.')+1) // remove namespace
 	}
 	
 	private function runMethod(methodName)
