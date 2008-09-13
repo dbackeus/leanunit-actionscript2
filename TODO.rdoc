@@ -9,4 +9,4 @@ Getting as far as to auto-recompile is feasible (but how to run the flash file w
 Growl support on mac os (would seem out of the question since the flash player can't do those kinds of calls).
 Getting crazy and spawning a sinatra webserver that flash could communicate with could do it.
 
-* The dream is now actually under construction. It will be called autolean and ship through a ruby gem.
+* The dream is now actually under construction. It will be called autolean and ship through a ruby gem. It will be extremely simple and only work on MacOS X in its first release.

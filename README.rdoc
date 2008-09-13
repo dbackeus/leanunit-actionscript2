@@ -1,6 +1,6 @@
 = LeanUnit
 
-http://github.com/dbackeus/leanunit-actionscript2
+* http://github.com/dbackeus/leanunit-actionscript2
 
 == THE STORY
 
@@ -20,13 +20,13 @@ Then either copy the leanUnit directory into your actionscript project source di
 
 == USAGE
 
-After installing, the first thing you need to do is create a test case class with the tests you want to run. If you don't feel like starting from scratch just to see how it works you can go ahead and run the attached example.fla or compile the MtascMain.as file with MTASC.
+After installing, the first thing you need to do is create a test case class with the tests you want to run. If you don't feel like starting from scratch just to see how it works you can go ahead and checkout the 'example' directory.
 
 === Naming Conventions
 
 There are some conventions for how you name your test classes and where you put them.
 
-* They should reside in a test/ directory relative to your projects source directory.
+* They should reside in a 'test' directory relative to your projects source directory.
 * They should start with the name of the class you want to test.
 * They should end with Test.as. 
 
@@ -70,7 +70,7 @@ The following is an example of a test class for String.
   	}
   }
 
-When your test class is created you can run it by instantiating it and calling the run() function on it. You can do this through either the flash IDE or with MTASC.
+When your test class is created you can run it by instantiating it and calling the run() function on it.
 
 === Using the Flash IDE
 
@@ -87,6 +87,7 @@ Then export the .fla and watch the results.
 Create an .as file to be the entry point for the compiler:
 
   // MtascMain.as
+  
   import test.*
   
   class MtascMain
