@@ -1,0 +1,23 @@
+== Lines Of Code Comparison
+
+So just how much leaner is LeanUnit compared to the competition?
+
+This is nothing serious but just a comparison I did for fun using cloc (http://cloc.sourceforge.net) running the code as javascript.
+
+=== ASUnit25
+                                                      
+3470.0 lines/s)                                       
+------------------------------------------------------
+Language          files     blank   comment      code 
+------------------------------------------------------
+Javascript           28       208       414      1113 
+------------------------------------------------------
+                                                      
+=== LeanUnit                                          
+                                                      
+1070.0 lines/s                                        
+------------------------------------------------------
+Language          files     blank   comment      code 
+------------------------------------------------------
+Javascript            6        86       134       315 
+------------------------------------------------------

@@ -8,9 +8,7 @@ class MtascMain
 {
 	static function main(root)
 	{
-		var testSuite = new TestSuite()
-		testSuite.addCase( new StringTest() )
-		testSuite.addCase( new ArrayTest() )
-		testSuite.run()
+		var suite = new TestSuite( StringTest, ArrayTest )
+		suite.run()
 	}
 }

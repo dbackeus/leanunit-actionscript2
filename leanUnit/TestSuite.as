@@ -1,16 +1,26 @@
 /*
-Should hold n TestCase's, run them and do a single report for all.
+Example:
+
+var suite = new TestSuite( StringTest, ArrayTest )
+suite.run()
+
+TestSuite extends Array so you can also do things like:
+
+var suite = new TestSuite()
+suite[0] = ArrayTest
+suite.push( StringTest )
+suite.run()
+
 */
 
 import leanUnit.*
 
-class leanUnit.TestSuite
+class leanUnit.TestSuite extends Array
 {
-	var testCases:Array
-	
 	var testCount:Number = 0
 	var assertionCount:Number = 0
 	var failures:Array = new Array()
+	var timeTaken:Number
 	
 	//-------------------------------------------------------------------
 	//	CONSTRUCTOR
@@ -18,41 +28,20 @@ class leanUnit.TestSuite
 
 	function TestSuite()
 	{
-		testCases = new Array()
+		push.apply(this, arguments)
 	}
-	
 	
 	//-------------------------------------------------------------------
 	//	PUBLIC FUNCTIONS
 	//-------------------------------------------------------------------
 	
-	function addCase( testCase:TestCase )
-	{
-		testCases.push( testCase )
-	}
-	
 	function run()
 	{
+		Output.writeln( "Running "+caseNames.join(', ') )
+	
 		reset()
-		
-		Output.writeln( "Running "+testCases.join(', ') )
-		
-		var startTime = getTimer()
-		for( var i=0; i<testCases.length; i++ )
-		{
-			var testCase:TestCase = testCases[i]
-			testCase.run( true )
-			
-			failures = merge( failures, testCase.failures )
-			testCount += testCase.testMethods.length
-			assertionCount += testCase.assertionCount
-		}	
-		var endTime = getTimer() - startTime
-		
-		Output.writeln()
-		Output.writeln('Finished in '+(endTime/1000)+' seconds')
-		
-		report()
+		iterateAndRun()
+		reportResults()
 	}
 	
 	//-------------------------------------------------------------------
@@ -66,25 +55,52 @@ class leanUnit.TestSuite
 		failures = new Array()
 	}
 	
-	private function merge( array:Array, array2:Array )
+	private function iterateAndRun()
 	{
-		for( var i=0; i<array2.length; i++ )
+		var startTime = getTimer()
+		for( var i=0; i<length; i++ )
 		{
-			array.push(array2[i])
-		}
-		return array
+			var testCase = new this[i]()
+			runCase( testCase )
+		}	
+		timeTaken = getTimer() - startTime
 	}
 	
-	private function report()
+	private function runCase( testCase:TestCase )
 	{
+		testCase.run()
+		
+		failures = failures.concat( testCase.failures )
+		testCount += testCase.testMethods.length
+		assertionCount += testCase.assertionCount
+	}
+	
+	private function reportResults()
+	{
+		Output.writeln()
+		Output.writeln('Finished in '+(timeTaken/1000)+' seconds')
+		
 		for( var i=0; i<failures.length; i++ )
 		{
 			Output.writeln()
 			Output.writeln( (i+1)+")")
 			Output.writeln( failures[i], "fail" )
 		}
+		
 		Output.writeln()
 		Output.writeln( testCount+" tests, "+assertionCount+" assertions, "+failures.length+" failures", failures.length > 0 ? 'fail' : 'success' )
 	}
+	
+	function get caseNames():Array
+	{
+		var names = new Array()
+		for( var i=0; i<length; i++ )
+		{
+			var instance = new this[i]()
+			names.push(instance.className)
+		}
+		return names
+	}
+	
 	
 }

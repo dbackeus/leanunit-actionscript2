@@ -2,7 +2,7 @@ import leanUnit.*
 
 /*
 
-Scenario:
+Example:
 
 // StringTest.as
 class StringTest extends leanUnit.TestCase
@@ -30,9 +30,6 @@ class StringTest extends leanUnit.TestCase
 	}
 }
 
-// Framescript
-new StringTest().run()
-
 */
 
 class leanUnit.TestCase extends Assertions
@@ -52,34 +49,19 @@ class leanUnit.TestCase extends Assertions
 		className = Reflection.getClassName(this)
 		className = className.substr(className.lastIndexOf('.')+1) // remove namespace
 	
-		reset()
+		failures = new Array()
+		assertionCount = 0
 	}
 	
 	//-------------------------------------------------------------------
 	//	PUBLIC METHODS
 	//-------------------------------------------------------------------
 	
-	function run( silent:Boolean )
+	function run()
 	{
-		reset()
-		
-		if( !silent) 
-		{
-			Output.writeln("Running "+className)
-		}
-		
-		var startTime = getTimer()
 		for(var i=0; i<testMethods.length; i++)
 		{
 			runMethod(testMethods[i])
-		}
-		var endTime = getTimer() - startTime
-		
-		if( !silent)
-		{
-			Output.writeln()
-			Output.writeln('Finished in '+(endTime/1000)+' seconds')
-			report()
 		}
 	}
 	
@@ -92,12 +74,6 @@ class leanUnit.TestCase extends Assertions
 	//	PRIVATE METHODS
 	//-------------------------------------------------------------------
 	
-	private function reset()
-	{
-		failures = new Array()
-		assertionCount = 0
-	}
-	
 	private function runMethod(methodName)
 	{
 		currentMethod = methodName
@@ -105,18 +81,6 @@ class leanUnit.TestCase extends Assertions
 		setup()
 		this[methodName]()
 		teardown()
-	}
-	
-	private function report()
-	{
-		for( var i=0; i<failures.length; i++ )
-		{
-			Output.writeln()
-			Output.writeln( (i+1)+")")
-			Output.writeln( failures[i], "fail" )
-		}
-		Output.writeln()
-		Output.writeln( testMethods.length+" tests, "+assertionCount+" assertions, "+failures.length+" failures", failures.length > 0 ? 'fail' : 'success' )
 	}
 	
 	//-------------------------------------------------------------------

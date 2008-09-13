@@ -1,7 +1,7 @@
 == TODO
 
 .TestCase
-- Should TestCase still be able to do reporting through run or should we force tests to run through a suite to avoid duplication?
+- Figure out how to deal with mocking (leanmock?)
 
 .Output
 - Add a scrollbar to deal with long test reports
