@@ -1,74 +1,110 @@
-=== DESCRIPTION
+= LeanUnit
+
+http://github.com/dbackeus/leanunit-actionscript2
+
+== THE STORY
 
 After wasting too much time trying to figure out ASUnit and feeling sick about how bloated its codebase was I decided to roll my own. This is the result.
 
-=== REQUIREMENTS
+== REQUIREMENTS
 
 A flash compiler. Example files are provided for Flash 8 and MTASC.
 
-=== INSTALL
+== INSTALL
 
-git clone git://github.com/druiden/leanunit-actionscript2.git
+If you don't have git you can get the files by using the download link at the github homepage. Otherwise just clone them from git.
 
-Then either copy the leanUnit directory into your source directory or link the cloned directory in your fla classpath (publish settings -> flash -> settings).
+  git clone git://github.com/druiden/leanunit-actionscript2.git
 
-=== USAGE
+Then either copy the leanUnit directory into your actionscript project source directory or link the cloned directory in your fla classpath (publish settings -> flash -> settings).
 
-Goes a little something like this...
+== USAGE
 
-.Begin with a simple test class.
+After installing, the first thing you need to do is create a test case class with the tests you want to run. If you don't feel like starting from scratch just to see how it works you can go ahead and run the attached example.fla or compile the MtascMain.as file with MTASC.
 
-// StringTest.as
-class StringTest extends leanUnit.TestCase
-{
-	var string:String
+=== Naming Conventions
+
+There are some conventions for how you name your test classes and where you put them.
+
+* They should reside in a test/ directory relative to your projects source directory.
+* They should start with the name of the class you want to test.
+* They should end with Test.as. 
+
+So if you're making a test class for your Person class you would create test/PersonTest.as. You are not forced to follow the conventions but I strongly recommend it to keep things nice and structured. 
+
+=== Structure of the Test Class
+
+So now that your newly created test class looks good from the outside. What to make of the inside.
+
+* All test classes must inherit from leanUnit.TestCase
+* All test functions must start with 'test'
+* You can add a setup function that will be run before every test function
+* You can add a teardown functino that will be run after every test function
+
+The following is an example of a test class for String.
+
+  // test/StringTest.as
+  
+  class test.StringTest extends leanUnit.TestCase
+  {
+  	var string:String
 	
-	function setup()
-	{
-		string = 'Asdf'
-	}
+  	function setup()
+  	{
+  		string = 'Asdf'
+  	}
 	
-	function testLength()
-	{
-		assertEqual(4, string.length)
-	}
+  	function testLength()
+  	{
+  		assertEqual(4, string.length)
+  	}
 	
-	function testToUpperCase()
-	{
-		assertEqual( 'ASDF', string.toUpperCase() )
-	}
+  	function testToUpperCase()
+  	{
+  		assertEqual( 'ASDF', string.toUpperCase() )
+  	}
 	
-	function teardown()
-	{
-		delete string
-	}
-}
+  	function teardown()
+  	{
+  		delete string
+  	}
+  }
 
-.You are using the Flash IDE:
+When your test class is created you can run it by instantiating it and calling the run() function on it. You can do this through either the flash IDE or with MTASC.
 
-// Framescript
-new StringTest().run()
+=== Using the Flash IDE
 
-Export the fla and watch the results.
+Add code for running your test class in the framescript of the .fla, like:
 
-.You are using the MTASC compiler:
+  import test.*
+  
+  new StringTest().run()
 
-// MtascMain.as
-class MtascMain
-{
-	static function main(root)
-	{
-		var st = new StringTest()
-		st.run()
-	}
-}
+Then export the .fla and watch the results.
 
-// From the command line
-mtasc -swf example.swf -header 550:400:10:080808 -main MtascMain.as
+=== Using the MTASC compiler
 
-Then run example.swf and watch the results.
+Create an .as file to be the entry point for the compiler:
 
-=== LICENSE
+  // MtascMain.as
+  import test.*
+  
+  class MtascMain
+  {
+  	static function main(root)
+  	{
+  		var st = new StringTest()
+  		st.run()
+  	}
+  }
+
+Then compile from the command line using something like:
+
+  mtasc -swf test/example.swf -header 550:400:10:080808 -main MtascMain.as
+
+Now you can run the generated .swf through Flash Player or from your webbrowser and watch the results.
+
+== LICENSE
 
 (The MIT License)
 

@@ -12,7 +12,7 @@ class leanUnit.Output
 	
 	static function write(message, messageType)
 	{
-		cssClass = messageType || 'default'
+		var cssClass = messageType || 'default'
 		instance.htmlText += '<span class="'+cssClass+'">'+message+'</span>'
 	}
 	

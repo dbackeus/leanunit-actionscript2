@@ -1,4 +1,4 @@
-class StringTest extends leanUnit.TestCase
+class test.StringTest extends leanUnit.TestCase
 {
 	var string
 	
@@ -28,6 +28,12 @@ class StringTest extends leanUnit.TestCase
 		assertEqual( 'asdf', split[0] )
 		assertEqual( 'hjkl', split[2] )
 		assertEqual( 3, split.length )
+	}
+	
+	function testSubstring()
+	{
+		assertEqual( 'As', string.substring(0,2) )
+		assertEqual( 'sdF', string.substring(1,4) )
 	}
 	
 	function teardown()
