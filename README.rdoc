@@ -126,6 +126,11 @@ You can add any number of test cases you want to run to your test suite before r
   suite.push( ArrayTest )
   suite.run()
 
+  // The oldschool way
+  var suite = new TestSuite()
+  suite[0] = StringTest
+  suite[1] = ArrayTest
+  suite.run()
 
 == LICENSE
 
