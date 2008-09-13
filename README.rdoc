@@ -6,7 +6,7 @@
 
 After wasting too much time trying to figure out ASUnit and feeling sick about how bloated its codebase was I decided to roll my own. This is the result.
 
-Note: I realized to day I had been looking only at asunit2 when I should have been looking at the refactored and better looking asunit25. That said asunit25 still looks like Java and Actionscript is not Java. LeanUnit is a whole lot leaner and to the point if you'll pardon my shameless self promotion.
+Note: I later realized I had been looking only at asunit2 when I should have been looking at the refactored and better looking asunit25. That said asunit25 still looks like Java and Actionscript is not Java. LeanUnit is a whole lot leaner and to the point if you'll pardon my shameless self promotion.
 
 == REQUIREMENTS
 
@@ -109,17 +109,22 @@ Then compile from the command line using something like:
 
 Now you can run the generated .swf through Flash Player or from your webbrowser and watch the results.
 
-=== Running Multiple Test Cases Using TestSuite
+=== Running Multiple Test Cases
 
-If you want to run more than one test case but still only do one report for all tests you can use the TestSuite class. Instantiate a TestSuite and add cases using the addCase function like in the example.
+You can add any number of test cases you want to run to your test suite before running it. TestSuite extends Array so you can work with it just like an array.
 
   import leanUnit.*
   import test.*
 
-  var testSuite = new TestSuite()
-  testSuite.addCase( new StringTest() )
-  testSuite.addCase( new ArrayTest() )
-  testSuite.run()
+  // The horisontal way
+  var suite = new TestSuite( StringTest, ArrayTest )
+  suite.run()
+  
+  // The vertical way
+  var suite = new TestSuite()
+  suite.push( StringTest )
+  suite.push( ArrayTest )
+  suite.run()
 
 
 == LICENSE
