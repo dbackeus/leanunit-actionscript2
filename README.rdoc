@@ -105,6 +105,19 @@ Then compile from the command line using something like:
 
 Now you can run the generated .swf through Flash Player or from your webbrowser and watch the results.
 
+=== Running Multiple Test Cases Using TestSuite
+
+If you want to run more than one test case but still only do one report for all tests you can use the TestSuite class. Instantiate a TestSuite and add cases useing the addCase function like in the example.
+
+  import leanUnit.*
+  import test.*
+
+  var testSuite = new TestSuite()
+  testSuite.addCase( new StringTest() )
+  testSuite.addCase( new ArrayTest() )
+  testSuite.run()
+
+
 == LICENSE
 
 (The MIT License)
