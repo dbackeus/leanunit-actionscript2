@@ -2,7 +2,7 @@ import leanUnit.*
 
 class leanUnit.Assertions
 {
-	var currentClass:String
+	var className:String
 	var currentMethod:String
 	
 	var assertionCount:Number
@@ -23,7 +23,7 @@ class leanUnit.Assertions
 		else
 		{
 			Output.addFail()
-			failures.push(new Failure(currentClass, currentMethod, message))
+			failures.push(new Failure(className, currentMethod, message))
 		}
 	}
 

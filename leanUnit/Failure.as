@@ -1,5 +1,6 @@
 class leanUnit.Failure
 {
+	var className:String
 	var method:String
 	var message:String
 	
@@ -7,8 +8,9 @@ class leanUnit.Failure
 	//	CONSTRUCTOR
 	//-------------------------------------------------------------------
 
-	function Failure(method, message)
+	function Failure(className, method, message)
 	{
+		this.className = className
 		this.method = method
 		this.message = message
 	}
@@ -19,7 +21,7 @@ class leanUnit.Failure
 	
 	function toString()
 	{
-		return method+": "+message
+		return className+"#"+method+" - "+message
 	}
 	
 }

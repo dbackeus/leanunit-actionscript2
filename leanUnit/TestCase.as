@@ -44,26 +44,48 @@ class leanUnit.TestCase extends Assertions
 	var teardown:Function
 	
 	//-------------------------------------------------------------------
+	//	CONSTRUCTOR
+	//-------------------------------------------------------------------
+
+	function TestCase()
+	{
+		className = Reflection.getClassName(this)
+		className = className.substr(className.lastIndexOf('.')+1) // remove namespace
+	
+		reset()
+	}
+	
+	//-------------------------------------------------------------------
 	//	PUBLIC METHODS
 	//-------------------------------------------------------------------
 	
-	function run()
+	function run( silent:Boolean )
 	{
 		reset()
 		
-		var startTime = getTimer()
-		Output.writeln("Running "+currentClass)
+		if( !silent) 
+		{
+			Output.writeln("Running "+className)
+		}
 		
+		var startTime = getTimer()
 		for(var i=0; i<testMethods.length; i++)
 		{
 			runMethod(testMethods[i])
 		}
 		var endTime = getTimer() - startTime
 		
-		Output.writeln()
-		Output.writeln('Finished in '+(endTime/1000)+' seconds')
-		
-		report()
+		if( !silent)
+		{
+			Output.writeln()
+			Output.writeln('Finished in '+(endTime/1000)+' seconds')
+			report()
+		}
+	}
+	
+	function toString()
+	{
+		return className
 	}
 	
 	//-------------------------------------------------------------------
@@ -74,8 +96,6 @@ class leanUnit.TestCase extends Assertions
 	{
 		failures = new Array()
 		assertionCount = 0
-		currentClass = Reflection.getClassName(this)
-		currentClass = currentClass.substr(currentClass.lastIndexOf('.')+1) // remove namespace
 	}
 	
 	private function runMethod(methodName)
